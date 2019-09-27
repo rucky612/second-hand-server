@@ -62,9 +62,11 @@ const Delete = async (req, res) => {
     const deleteProductSQL =
       "DELETE FROM Product JOIN Category Product.p_cg_id = Category.cg_id WHERE ?";
     const rows = connection.query(selectPhotoSQL, req.body);
-    rows.forEach(row => {
-      aws.deleteImg(row.pi_name);
-    });
+    if (rows) {
+      rows.forEach(row => {
+        aws.deleteImg(row.pi_name);
+      });
+    }
     connection.query(deleteProductSQL, req.body);
     const success = await connection.query(sql, req.body);
     console.log("The Delete Method is : ", success);
