@@ -12,6 +12,9 @@ const makeSearchSQL = (sql, value, key) => {
   if (value && key === "o_price") {
     return `${sql} p_price REGEXP '${value}' AND`;
   }
+  if (value && key === "o_user") {
+    return `${sql} u_name REGEXP '${value}' AND`;
+  }
   if (value) {
     return `${sql} ${key} REGEXP '${value}' AND`;
   }
