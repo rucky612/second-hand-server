@@ -6,6 +6,9 @@ const makeSearchSQL = (sql, value, key) => {
   if (value && key === "o_status") {
     return `${sql} ${key} = '${value}' AND`;
   }
+  if (value && key === "o_price") {
+    return `${sql} p_price REGEXP '${value}' AND`;
+  }
   if (value) {
     return `${sql} ${key} REGEXP '${value}' AND`;
   }
@@ -103,7 +106,7 @@ exports.GET = async (req, res) => {
     const rows = await connection.query(
       `${sql} ${joinSQL} ${searchSQL} ${sortedOSQL} ${limitSQL}`
     );
-    const count = await connection.query(`${countSQL} ${searchSQL}`);
+    const count = await connection.query(`${countSQL} ${joinSQL} ${searchSQL}`);
     console.log("The Get Method is : ", rows, count);
     res.send({ rows, count: count[0]["COUNT(*)"] });
   } catch (err) {
