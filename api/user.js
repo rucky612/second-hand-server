@@ -63,7 +63,7 @@ exports.GET = async (req, res) => {
 
 exports.PUT = async (req, res) => {
   try {
-    const id = req.decoded ? req.decoded.u_id : req.body.u_id;
+    const id = req.decoded.u_id || req.body.u_id;
     const user = { ...req.body };
     delete user.token;
     const sql = `UPDATE User SET ? WHERE u_id=?`;
