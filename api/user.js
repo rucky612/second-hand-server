@@ -111,7 +111,7 @@ exports.login = async (req, res) => {
     }
   } catch (err) {
     res.status(403).json({
-      message: error.message
+      message: err.message
     });
   }
 };
