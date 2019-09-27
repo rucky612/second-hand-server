@@ -67,6 +67,7 @@ exports.PUT = async (req, res) => {
     const user = { ...req.body };
     delete user.token;
     const sql = `UPDATE User SET ? WHERE u_id=?`;
+    console.log(user, id);
     const rows = await connection.query(sql, [user, id]);
     console.log("The Put Method is : ", rows);
     res.send(rows);
