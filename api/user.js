@@ -65,6 +65,7 @@ exports.PUT = async (req, res) => {
   try {
     const id =
       req.decoded && req.decoded.u_id ? req.decoded.u_id : req.body.u_id;
+    console.log(req.decoded, req.body);
     const user = { ...req.body };
     delete user.token;
     const sql = `UPDATE User SET ? WHERE u_id=?`;
