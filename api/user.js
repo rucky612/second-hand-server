@@ -30,7 +30,7 @@ exports.GET = async (req, res) => {
     const { offset, limit, search, sorted } = req.query;
     const countSQL = "SELECT COUNT(*) FROM User";
     const sql =
-      "SELECT u_name, u_email, u_status, u_address, u_phone FROM User";
+      "SELECT u_id, u_name, u_email, u_status, u_address, u_phone FROM User";
     const searchObj = search ? JSON.parse(search) : null;
     const sortedObj = sorted ? JSON.parse(sorted) : null;
     const searchStr =
@@ -69,7 +69,6 @@ exports.PUT = async (req, res) => {
     const user = { ...req.body };
     delete user.token;
     const sql = `UPDATE User SET ? WHERE u_id=?`;
-    console.log(user, id);
     const rows = await connection.query(sql, [user, id]);
     console.log("The Put Method is : ", rows);
     res.send(rows);
