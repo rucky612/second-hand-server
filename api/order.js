@@ -22,9 +22,9 @@ const makeSearchSQL = (sql, value, key) => {
 };
 
 const getImgObj = async (u_id, p_id) => {
-  const sql = "SELECT pi_name, pi_caption, pi_size, pi_create_by FROM Cart";
+  const sql = "SELECT pi_name, pi_caption, pi_size, pi_create_by FROM Orders";
   const joinSQL =
-    "JOIN User ON User.u_id = Cart.c_u_id JOIN Product ON Product.p_id = Cart.c_p_id JOIN Photo ON Photo.pi_p_id = Product.p_id";
+    "JOIN User ON User.u_id = Orders.o_u_id JOIN Product ON Product.p_id = Orders.o_p_id JOIN Photo ON Photo.pi_p_id = Product.p_id";
   const searchSQL = `WHERE u_id = '${u_id}' AND p_id = '${p_id}'`;
   const limitSQL = "LIMIT 0, 1";
   try {
